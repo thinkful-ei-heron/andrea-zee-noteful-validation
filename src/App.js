@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   addFolder = folderName =>{
-    fetch(`http:localhost:9090/folders`, {
+    fetch(`http://localhost:9090/folders`, {
       method: 'POST',
       body: JSON.stringify({name: folderName}),
       headers: {
@@ -39,7 +39,7 @@ class App extends Component {
       }
       return res.json()
     })
-    .then(data => this.setState({folders: data}))
+    .then(data => this.setState({folders: [...this.state.folders, data]}))
     }
 
   
@@ -85,9 +85,9 @@ class App extends Component {
           <Switch>
             <Route path='/folder/:folderid/note/:noteid/' render={(props) => <><NoteView {...props}/></>}/>
             <Route path='/folder/:folderid/' render={(props)=> {
-              return <FolderView {...props}/>}} />
+              return <FolderView {...props} addFolder={this.addFolder}/>}} />
             <Route exact path='/' render={(props)=> {
-              return <Mainpage {...props}/>
+              return <Mainpage {...props} addFolder={this.addFolder}/>
             }} />
           </Switch>
         </main>

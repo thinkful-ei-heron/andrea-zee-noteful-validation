@@ -7,7 +7,7 @@ export default class Mainpage extends Component {
   render() {
     return (
       <div className='main-elements'>
-        <FolderList folders={this.props.folders}/>
+        <FolderList folders={this.props.folders} addFolder={this.props.addFolder}/>
         <NoteList notes={this.props.notes}/>
       </div>
     )
