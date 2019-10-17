@@ -4,7 +4,6 @@ import './css/Folder.css'
 
 export default class Folder extends Component {
   
-
   render() {
     let link='/folder/'+this.props.id+'/'
     return (
