@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './css/Folder.css'
+// import UserContext from './UserContext';
 
 export default class Folder extends Component {
-  
+
   render() {
     let link='/folder/'+this.props.id+'/'
     return (

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch }from 'react-router-dom';
 import Mainpage from './Mainpage';
 import Header from './Header';
+import AddFolder from './AddFolder';
 import FolderView from './FolderView';
 import NoteView from './NoteView';
 import './dummy-store'
@@ -23,6 +24,25 @@ class App extends Component {
         notes: newNotes
       })
   }
+
+  addFolder = folderName =>{
+    fetch(`http:localhost:9090/folders`, {
+      method: 'POST',
+      body: JSON.stringify({name: folderName}),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then(res => {
+      if(!res.ok){
+        throw new Error(res.status)
+      }
+      return res.json()
+    })
+    .then(data => this.setState({folders: data}))
+    }
+
+  
 
   componentDidMount() {
     const folderUrl= 'http://localhost:9090/folders';
