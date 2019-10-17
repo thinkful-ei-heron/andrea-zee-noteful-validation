@@ -43,19 +43,69 @@ class App extends Component {
     .then(data => this.setState({folders: [...this.state.folders, data]}))
     }
 
-    addNote = (name, content, modified, folderId, id) => {
-      const noteToAdd = [{
-        name: name,
-        content: content,
-        id: id,
-        modified: modified,
-        folderId: folderId
-      }]
-      this.setState({
-        notes: [...this.setState.notes, noteToAdd]
-        // notes: this.state.notes.concat(noteToAdd)
-      });
-    }
+
+// addNote =(addNote) =>{
+//         const input= this.state.note
+//         const data= JSON.stringify({
+//             name: `${input.name}`,
+//             content: `${input.content}`,
+//             folderId: `${input.folderId}`,
+//             modified: `${input.modified}`
+//         })
+//         fetch(`http://localhost:9090/notes`, {
+//             method: 'POST',
+//             headers: {'content-type': 'application/json'},
+//             body: data
+//         })
+//         .then(res => {
+//             if(!res.ok){
+//               throw new Error(res.status)
+//             }
+//             return res.json()
+//           })
+//           .then(data => {
+//             console.log(data.name)
+//             console.log(data.id)
+//             addNote(data.name, data.content, data.modified, data.folderId, data.id)
+//             return data
+//           })
+//           .catch(error => {
+//             console.error(error)
+//           })
+
+
+    addNote = noteName =>{
+      fetch(`http://localhost:9090/notes`, {
+        method: 'POST',
+        body: JSON.stringify({name: noteName}),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      .then(res => {
+        if(!res.ok){
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(data => this.setState({notes: [...this.state.notes, data]}))
+      }
+
+
+
+    // addNote = (name, content, modified, folderId, id) => {
+    //   const noteToAdd = [{
+    //     name: name,
+    //     content: content,
+    //     id: id,
+    //     modified: modified,
+    //     folderId: folderId
+    //   }]
+    //   this.setState({
+    //     notes: [...this.setState.notes, noteToAdd]
+    //     // notes: this.state.notes.concat(noteToAdd)
+    //   });
+    // }
 
   componentDidMount() {
     const folderUrl= 'http://localhost:9090/folders';
@@ -92,13 +142,11 @@ class App extends Component {
         notes: this.state.notes,
         folders: this.state.folders,
         deleteRequest: this.deleteNote,
-        addNote: this.addNote
       }}>
         <main className='App'>
           <Route path='' component={Header} />
           <Switch>
-            <Route path='/addNote' component={AddNote}/>
-            <Route path='/folder/:folderid/note/:noteid/' render={(props) => <><NoteView {...props}/></>}/>
+            <Route path='/folder/:folderid/note/:noteid/' render={(props) => <><NoteView {...props} addNote={this.addNote}/></>}/>
             <Route path='/folder/:folderid/' render={(props)=> {
               return <FolderView {...props} addFolder={this.addFolder}/>}} />
             <Route exact path='/' render={(props)=> {
@@ -107,7 +155,7 @@ class App extends Component {
           </Switch>
         </main>
       </UserContext.Provider>
-    );
+    )
   }
 
 }

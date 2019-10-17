@@ -9,7 +9,7 @@ export default class NoteView extends Component {
     return (
       <div className='main-elements'>
         <FolderList selectedId={this.props.match.params.folderid} selectedNote={this.props.match.params.noteid}/>
-        <NoteList selectedNote={this.props.match.params.noteid}/>
+        <NoteList addNote= {this.props.addNote} selectedNote={this.props.match.params.noteid}/>
         <button onClick={() => this.props.history.goBack()}>Go Back</button>
       </div>
     )

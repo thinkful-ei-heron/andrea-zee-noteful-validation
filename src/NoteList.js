@@ -6,6 +6,9 @@ import './css/NoteList.css'
 
 export default class NoteList extends Component {
   static contextType = UserContext
+  state={
+    addingNote: false
+  }
 
   render() {
     let notes = this.context.notes
@@ -36,7 +39,7 @@ export default class NoteList extends Component {
               selectedNote={this.props.selectedNote} />)
             }
         </div>
-        {this.props.selectedNote ? <></> : <Link to ='/addNote' className= 'add-note' >Add Note</Link>}
+        {this.props.selectedNote ? <></> : <Link to ='/addNote' className= 'add-note' addNote={this.props.addNote} >Add Note</Link>}
       </div>
     )
   }
