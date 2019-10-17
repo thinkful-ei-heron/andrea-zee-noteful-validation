@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Note from './Note'
+import { Link } from 'react-router-dom'
 import UserContext from './UserContext'
 import './css/NoteList.css'
 
@@ -35,7 +36,7 @@ export default class NoteList extends Component {
               selectedNote={this.props.selectedNote} />)
             }
         </div>
-        {this.props.selectedNote ? <></> : <button>Add Note</button>}
+        {this.props.selectedNote ? <></> : <Link to ='/addNote' className= 'add-note' >Add Note</Link>}
       </div>
     )
   }
