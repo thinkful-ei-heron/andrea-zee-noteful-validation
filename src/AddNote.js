@@ -67,7 +67,7 @@ export default class AddNote extends React.Component {
     //       .catch(error => {
     //         console.error(error)
     //       })
-    }
+    
     render() {
         return (
             <form className='add-note' onSubmit={e => this.handleNoteSubmit(e)}>
