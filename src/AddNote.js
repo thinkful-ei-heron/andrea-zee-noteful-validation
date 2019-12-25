@@ -1,12 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import UserContext from './UserContext'
 
 
 export default class AddNote extends React.Component {
-
-    // static sontextType= UserContext;
-
     state= {
         note: {
             name: '',
@@ -39,34 +36,34 @@ export default class AddNote extends React.Component {
         e.preventDefault();
         this.props.addNote(this.state.note);
     }
-    // handleNewNote =(addNote) =>{
-    //     const input= this.state.note
-    //     const data= JSON.stringify({
-    //         name: `${input.name}`,
-    //         content: `${input.content}`,
-    //         folderId: `${input.folderId}`,
-    //         modified: `${input.modified}`
-    //     })
-    //     fetch(`http://localhost:9090/notes`, {
-    //         method: 'POST',
-    //         headers: {'content-type': 'application/json'},
-    //         body: data
-    //     })
-    //     .then(res => {
-    //         if(!res.ok){
-    //           throw new Error(res.status)
-    //         }
-    //         return res.json()
-    //       })
-    //       .then(data => {
-    //         console.log(data.name)
-    //         console.log(data.id)
-    //         addNote(data.name, data.content, data.modified, data.folderId, data.id)
-    //         return data
-    //       })
-    //       .catch(error => {
-    //         console.error(error)
-    //       })
+    handleNewNote =(addNote) =>{
+        const input= this.state.note
+        const data= JSON.stringify({
+            name: `${input.name}`,
+            content: `${input.content}`,
+            folderId: `${input.folderId}`,
+            modified: `${input.modified}`
+        })
+        fetch(`http://localhost:9090/notes`, {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: data
+        })
+        .then(res => {
+            if(!res.ok){
+              throw new Error(res.status)
+            }
+            return res.json()
+          })
+          .then(data => {
+            console.log(data.name)
+            console.log(data.id)
+            addNote(data.name, data.content, data.modified, data.folderId, data.id)
+            return data
+          })
+          .catch(error => {
+            console.error(error)
+          })
     
     render() {
         return (

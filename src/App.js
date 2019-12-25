@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Route, Switch }from 'react-router-dom';
 import Mainpage from './Mainpage';
 import Header from './Header';
-import AddFolder from './AddFolder';
-import AddNote from './AddNote';
+// import AddFolder from './AddFolder';
+// import AddNote from './AddNote';
 import FolderView from './FolderView';
 import NoteView from './NoteView';
 import './dummy-store'
